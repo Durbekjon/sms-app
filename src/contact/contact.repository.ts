@@ -47,13 +47,10 @@ export class ContactRepostory {
   }
 
   async update(id: string, data: UpdateDto) {
-    const updateObject = {
-      where: {
-        id,
-      },
-      data: { number: data.number },
-    };
-    const updatedData = await this.prismaService.contact.update(updateObject);
+    const updatedData = await this.prismaService.contact.update({
+      where: { id },
+      data: { name: data.name, number: data.number },
+    });
 
     return updatedData;
   }

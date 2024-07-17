@@ -32,16 +32,7 @@ export class ContactService {
     return { data };
   }
 
-  async update(id: string, data: UpdateDto, user: IUser) {
-    const existData = await this.contactRepostiroy.existContact(
-      data.number,
-      user.id,
-    );
-
-    if (existData) {
-      throw new HttpException('Allready exist', HttpStatus.FORBIDDEN);
-    }
-
+  async update(id: string, data: UpdateDto) {
     const updateData = await this.contactRepostiroy.update(id, data);
 
     return updateData;

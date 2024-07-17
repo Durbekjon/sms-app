@@ -48,16 +48,15 @@ export class ContactController {
   @ApiResponse({ type: UpdateResponse })
   @Version('1')
   @Put(':id')
-  update(
-    @Param('id') id: string,
-    @Body() data: UpdateDto,
-    @User() user: IUser,
-  ) {
-    return this.contactService.update(id, data, user);
+  update(@Param('id') id: string, @Body() data: UpdateDto) {
+    return this.contactService.update(id, data);
   }
 
+  @ApiOperation({ summary: 'Delete contact' })
+  @ApiBearerAuth('access-token')
+  @Version('1')
   @Delete(':id')
-  delete(@Param() id: string, @User() user: IUser) {
+  delete(@Param('id') id: string, @User() user: IUser) {
     return this.contactService.delete(id, user);
   }
 }
